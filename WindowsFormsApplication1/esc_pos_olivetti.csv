@@ -1,0 +1,439 @@
+Command (hex);Parameters;Parameter type;Parameter value (dec);Description;Printer models;Comments
+07;;;;Bell;OLIVETTI PR2;
+08;;;;BACK SPACE;OLIVETTI PR2;
+0A;;;;LINE FEED FORWARD;OLIVETTI PR2;
+0C;;;;FORM FEED (REAR EJECTION);OLIVETTI PR2;
+0D;;;;CR Carriage return;OLIVETTI PR2;
+18;;;;Cancel current line transmitted;OLIVETTI PR2;
+7F;;;;Clear print buffer;OLIVETTI PR2;
+1B 51;;;;Define document length;OLIVETTI PR2;
+;@field;DecString;;The decimal value of "nnn" defines the total length of the document as the number of line feeds in
+the currently selected value.;OLIVETTI PR2;
+;;;27;;OLIVETTI PR2;
+;e;byte;;;OLIVETTI PR2;
+;;;27;string ending;OLIVETTI PR2;
+;n;byte;;;OLIVETTI PR2;
+;;;90;string ending;OLIVETTI PR2;
+1B 4A;;;;Set left margin;OLIVETTI PR2;
+;@field;DecArray;;;OLIVETTI PR2;
+;;;3;The decimal value of "nnn? defines, as an absolute value, the position of the left margin which will
+coincide with the first printing position of each line. This position is assigned the value 001 and
+becomes the reference point for all the horizontal positioning commands.
+If "nnn" is equal to 000, the left margin will be set at the edge of the paper or at the margin set
+using ESC | A nnn.
+If the value of "nnn" exceeds the length of line-1, the edge of the paper or the margin set using
+ESC | A nnn will be set.;OLIVETTI PR2;
+1B 54;;;;Define top of form " TOF";OLIVETTI PR2;
+;@field;DecArray;;Defines, in nnn/216" (or nnn/240", depending on the SETUP ), the value of the top of form starting
+from the top edge of the document.
+If nnn = 999, the mechanical TOF is set.;OLIVETTI PR2;
+;;;3;;OLIVETTI PR2;
+1B 4D;;;;DEFINE BOTTOM OF FORM "BOF";OLIVETTI PR2;
+;@field;DecArray;;The decimal value of "nnn" defines the length of the bottom of the form, as a number of line feeds
+of the currently selected value.;OLIVETTI PR2;
+;;;3;;OLIVETTI PR2;
+1B 26;;;;ELEMENTARY VERTICAL SPACING;OLIVETTI PR2;
+;@field;DecArray;;Defines the new line feed value, expressed in "nn" elementary steps, without recalculating the
+form length and the BOF.
+The value of the elementary step is expressed in n/216" (or n/240", depending on the SETUP).
+When "nn" is equal to 00, the default value (1/6") is set.;OLIVETTI PR2;
+;;;2;;OLIVETTI PR2;
+1B 3C;;;;PRINT PITCH 10 CPI;OLIVETTI PR2;
+1B 3D;;;;PRINT PITCH 12 CPI;OLIVETTI PR2;
+1B 3E;;;;PRINT PITCH COMPRESSED 16.6 / 17.1 CPI;OLIVETTI PR2;
+1B 61;;;;PRINT PITCH;OLIVETTI PR2;
+;n;byte;;;OLIVETTI PR2;
+;;;48;Default;OLIVETTI PR2;
+;;;49;10 cpi;OLIVETTI PR2;
+;;;50;12 cpi;OLIVETTI PR2;
+;;;51;15 cpi;OLIVETTI PR2;
+;;;52;16.6 cpi;OLIVETTI PR2;
+;;;56;17.1 cpi;OLIVETTI PR2;
+;;;57;5 cpi;OLIVETTI PR2;
+1B 37;;;;LINE FEED BACK;OLIVETTI PR2;
+1B 3F;;;;PROPORTIONAL SPACING;OLIVETTI PR2;
+1B 52;;;;SELECT GRAPHIC FONT;OLIVETTI PR2;
+;@field;DecArray;;;OLIVETTI PR2;
+;;;3;000 Default
+001 HSD
+002 Draft
+003 NLQ1
+014 NLQ2
+006 Italics NLQ2
+007 Italics Draft
+009 OCR-B
+010 OCR-A
+015 HSD
+017 LQ2
+018 Italics NLQ1
+020 Italics LQ2;OLIVETTI PR2;
+1B 33;;;;DOUBLE WIDTH;OLIVETTI PR2;
+1B 34;;;;CANCEL DOUBLE WIDTH;OLIVETTI PR2;
+1B 64;;;;DOUBLE HEIGHT AND DOUBLE WIDTH;OLIVETTI PR2;
+1B 65;;;;CANCEL DOUBLE HEIGHT AND DOUBLE WIDTH;OLIVETTI PR2;
+1B 21 57;;;;DOUBLE HEIGHT;OLIVETTI PR2;
+;n;byte;;;OLIVETTI PR2;
+;;;48;Sets the double height print starting from the current position;OLIVETTI PR2;
+;;;49;Cancels the double height print starting from the current position;OLIVETTI PR2;
+1B 21 20;;;;ADDS COLUMNS TO THE RIGHT OF THE CHARACTER;OLIVETTI PR2;
+;@field;DecArray;;Add to the current print pitch nnn columns of nnn/120" (with nnn = 001-255);OLIVETTI PR2;
+;;;3;;OLIVETTI PR2;
+1B 28;;;;BOLD FACE;OLIVETTI PR2;
+1B 29;;;;CANCEL BOLD FACE;OLIVETTI PR2;
+1B 2A;;;;UNDERLINE;OLIVETTI PR2;
+;n;byte;;;OLIVETTI PR2;
+;;;48;0 Normal underline;OLIVETTI PR2;
+;;;51;3 Overline;OLIVETTI PR2;
+;;;52;4 Over and underline;OLIVETTI PR2;
+1B 2B;;;;CANCEL UNDERLINE;OLIVETTI PR2;
+1B 60;;;;SUPERSCRIPT - SUBSCRIPT;OLIVETTI PR2;
+;n;byte;;;OLIVETTI PR2;
+;;;48;0 Superscript;OLIVETTI PR2;
+;;;49;1 Subscript;OLIVETTI PR2;
+1B 7B;;;;CANCEL SUPERSCRIPT SUBSCRIPT;OLIVETTI PR2;
+1B 53 35;;;;Select printer device;OLIVETTI PR2;
+1B 48;;;;SET ABSOLUTE HORIZONTAL POSITION;OLIVETTI PR2;
+;@field;DecArray;;Moves the current position, from wherever it is, to character position "nnn" of the current line;OLIVETTI PR2;
+;;;3;;OLIVETTI PR2;
+1B 49;;;;SET RELATIVE VERTICAL POSITION;OLIVETTI PR2;
+;@field;DecArray;;Prints the current line and feeds the form "nnn" line feeds;OLIVETTI PR2;
+;;;3;;OLIVETTI PR2;
+1B 4C;;;;Set absolute vertical position;OLIVETTI PR2;
+;@field;DecArray;;Prints the current line and feeds the form to the line specified by "nnn";OLIVETTI PR2;
+;;;3;;OLIVETTI PR2;
+1B 4F;;;;EJECT DOCUMENT;OLIVETTI PR2;
+1B 5E 30;;;;CHANGE EMULATION. Selects " IBM Emulation ".;OLIVETTI PR2;
+1B 5B;;;;SELECT CHARACTER SET;OLIVETTI PR2;
+;@field;DecArray;;;OLIVETTI PR2;
+;;;3;nnn Symbol set Olive
+000 International 
+010 International 
+020 Germany 
+030 Portugal 
+040 Spain 1 
+050 Denmark/Norway 
+060 France 
+070 Italy 
+080 Sweden/Finland 
+090 Switzerland 
+100 Great Britain 
+110 USA ASCII 
+140 Greece 
+150 Israel 
+170 Spain 2 
+180 USSR 
+200 Yugoslavia * 
+410 Olivetti TCV 370
+500 Canada 
+510 SDC 
+520 Turkey 
+530 Arabic 
+540 CIBC * 
+771 PC-210 Greek    
+780 PC-855 Cyrillic 
+781 PC-862 Hebrew   
+782 PC-864 Arabic   
+783 PC-866 Cyrillic
+600 ISO 8859/1 Latin 1        
+602 ISO 8859/9 Latin 5        
+605 ISO 8859/2 Latin 2        
+615 ISO 8859/5 Cyrillic       
+617 ISO 8859/15 Latin 9 (euro)
+620 ISO 8859/6 Latin Arabic   
+623 ISO 8859/7 Greek          
+625 ISO 8859/8 Hebrew         
+640 PC-1252 WIN Latin 1       
+645 PC-1250 WIN Latin 2       
+680 OLI-UNIX                  
+700 PC-437 International      
+701 PC-220 Spain 2            
+710 PC-865 Nordic             
+711 PC-Denmark/Norway         
+712 PC-Denmark OPE            
+720 PC-860 Portugal           
+730 PC-863 Canadian French    
+740 PC-850 Latin 1            
+741 PC-858 Latin 1 (euro)     
+742 PC-857 Turkish Latin 5    
+750 PC-852 Latin 2            
+770 PC-851 Greek              ;OLIVETTI PR2;
+1B 31;;;;9/24 PIN B.I.M PRINT;OLIVETTI PR2;
+;@bit;BitField;;;OLIVETTI PR2;
+;;;;b8: = 0 fixed;OLIVETTI PR2;
+;;;;b7: = 1 fixed;OLIVETTI PR2;
+;;;;b6: = 0 fixed;OLIVETTI PR2;
+;;;;b5: = 0 fixed;OLIVETTI PR2;
+;;;;b4: = 0 fixed;OLIVETTI PR2;
+;;;;b3: = 0 Print in positive / 1 Print in negative;OLIVETTI PR2;
+;;;;b2: = 0 parameter "mmmm" does not follow / 1 parameter "mmmm" follows;OLIVETTI PR2;
+;;;;b1: = 0 parameter "nnn" does not follow / 1 parameter "nnn" follows;OLIVETTI PR2;
+;@field;DecArray;;defines the length of the print line, expressed as a number of dots.;OLIVETTI PR2;
+;;;4;;OLIVETTI PR2;
+;@field;DecArray;;defines the resolution level that is, in elementary steps, the horizontal distance at which two consecutive dots can be printed
+Nnn 9dot / 24dot density
+000 72 dpi / 180
+001 240 dpi / 360
+002 120 dpi / 240
+003 80 dpi / 120
+004 60 dpi / 60;OLIVETTI PR2;
+;;;3;;OLIVETTI PR2;
+;@string;BinaryString;;;OLIVETTI PR2;
+;;;27;Graphic data till ESC CR, ESC LF, ESC 7, ESC 2;OLIVETTI PR2;
+;n;BitField;;;OLIVETTI PR2;
+;;;13;eof;OLIVETTI PR2;
+;;;10;eof;OLIVETTI PR2;
+;;;7;eof;OLIVETTI PR2;
+;;;2;eof;OLIVETTI PR2;
+1B 32;;;;RESET B.I.M.;OLIVETTI PR2;
+1B 58;;;;SET RELATIVE HORIZONTAL POSITION;OLIVETTI PR2;
+;@field;DecArray;;nnn" defines a movement equal to "nnn" columns at bim resolution defined by parameter "nnn" of the ESC 1 command.;OLIVETTI PR2;
+;;;3;;OLIVETTI PR2;
+1B 68 30;;;;9 PIN DOWNLINE LOADING CHARACTERS INTO THE USER MEMORY (DLL);OLIVETTI PR2;
+;n;byte;;binary start code and mark the range in which the characters will be loaded;OLIVETTI PR2;
+;m;byte;;binary end code and mark the range in which the characters will be loaded;OLIVETTI PR2;
+;d0;byte;;number of leading columns;OLIVETTI PR2;
+;d1;byte;;number of main columns;OLIVETTI PR2;
+;d2;byte;;number of trailing columns;OLIVETTI PR2;
+;@data;BinaryArray;;form the pattern of the character during loading. Each column of data consists of one byte (3 byte for 24 pin mode).;OLIVETTI PR2;
+;;;(d0+d1+d2)*(m-n+1);;OLIVETTI PR2;
+1B 3A 30 30 30;;;;COPY CHARACTER GENERATOR INTO USER MEMORY;OLIVETTI PR2;
+1B 6D;;;;SELECT CHARACTER GENERATOR;OLIVETTI PR2;
+;n;byte;;;OLIVETTI PR2;
+;;;48;Current character generator;OLIVETTI PR2;
+;;;49;Character generator in user memory;OLIVETTI PR2;
+;m;byte;;;OLIVETTI PR2;
+;;;48;string ending;OLIVETTI PR2;
+1B 5A;;;;REQUEST FOR PRIMARY ID;OLIVETTI PR2;
+1B 2F 37;;;;PRINTER ID;OLIVETTI PR2;
+1B 2F 2F;;;;(PR40+ EMULATION IDENTIFIER);OLIVETTI PR2;
+1B 2F 2E;;;;(PR2845 EMULATION IDENTIFIER);OLIVETTI PR2;
+1B 69;;;;REQUEST FOR BASIC MACHINE CONFIGURATION;OLIVETTI PR2;
+1B 6A;;;;Status request;OLIVETTI PR2;
+1B 20 42;;;;REQUEST FOR DOCUMENT STATUS;OLIVETTI PR2;
+1B 20 62;;;;REQUEST FOR FW RELEASE ID;OLIVETTI PR2;
+1B 20 61;;;;Request for Set-Up configuration;OLIVETTI PR2;
+1B 6C;;;;Reset error;OLIVETTI PR2;
+1B 6E;;;;Olivetti controlled selection;OLIVETTI PR2;
+1B 6F;;;;FREE RUNNING MODE SELECTION;OLIVETTI PR2;
+1B 30;;;;GENERAL RESET;OLIVETTI PR2;
+1B 55;;;;UNI/BIDIRECTIONAL PRINTING;OLIVETTI PR2;
+;@bit;BitField;;bit 8: = 0 fixed;OLIVETTI PR2;
+;;;;bit 7: = 1 fixed;OLIVETTI PR2;
+;;;;bit 6: = 1 Book Operator;OLIVETTI PR2;
+;;;;bit 5: = 0 Led OFF / 1 Led ON;OLIVETTI PR2;
+;;;;bit 4: = 0 fixed;OLIVETTI PR2;
+;;;;bit 3: = 0 fixed;OLIVETTI PR2;
+;;;;bit 2: = 1 Station 2;OLIVETTI PR2;
+;;;;bit 1: = 1 Station 1;OLIVETTI PR2;
+1B 56;;;;CONSOLE LED ON/OFF (treated as NOP).;OLIVETTI PR2;
+1B 2E;;;;Select automatic operator booking mode;OLIVETTI PR2;
+1B 5F;;;;SELECT MANUAL OPERATOR BOOKING MODE;OLIVETTI PR2;
+1B 23;;;;ASSIGN REFERENCE FOR ESC L NNN;OLIVETTI PR2;
+;n;byte;;;OLIVETTI PR2;
+;;;48;Positions the document at line "nnn" defined by ESC L with a document edge reference;OLIVETTI PR2;
+;;;49;Positions the document at line "nnn" defined by ESC L with a reference at the top margin defined by ESC T or, if no top margin is defined, at the minimum top margin;OLIVETTI PR2;
+1B 7C 41;;;;DEFINE OFFSET IN ELEMENTARY STEPS;OLIVETTI PR2;
+;@field;DecArray;;the length of the line is reduced by "nnn".;OLIVETTI PR2;
+;;;3;;OLIVETTI PR2;
+1B 7C 42;;;;DEFINE DOCUMENT WIDTH/LENGTH;OLIVETTI PR2;
+;@field;DecArray;;nnnn/120", the actual width of the passbook on which magnetic operations are to be carried out.;OLIVETTI PR2;
+;;;48;;OLIVETTI PR2;
+;n;byte;;;OLIVETTI PR2;
+;;;59;divider;OLIVETTI PR2;
+;@field;DecArray;;mmmm defines, in mm, the physical length of the document to be handled;OLIVETTI PR2;
+;;;4;;OLIVETTI PR2;
+1B 27;;;;Set document type;OLIVETTI PR2;
+;@bit;BitField;;;OLIVETTI PR2;
+;;;;bit 8: = 0 fixed;OLIVETTI PR2;
+;;;;bit 7: = 1 fixed;OLIVETTI PR2;
+;;;;bit 6: = 0 fixed;OLIVETTI PR2;
+;;;;bit 5: = 0 fixed;OLIVETTI PR2;
+;;;;bit 4: = x not significant;OLIVETTI PR2;
+;;;;bit 3: = 0 document / 1 passbook;OLIVETTI PR2;
+;;;;bit 2: = 0 vertical seam / 1 horizontal seam;OLIVETTI PR2;
+;;;;bit 1: = x not significant;OLIVETTI PR2;
+1B 2F;;;;SET ABSOLUTE VERTICAL POSITION IN ELEMENTARY STEPS;OLIVETTI PR2;
+;m;byte;;;OLIVETTI PR2;
+;;;48;bottom margin;OLIVETTI PR2;
+;;;49;top margin;OLIVETTI PR2;
+;@field;DecArray;;the printer feeds it in and positions it at "nnnn" elementary steps from the margin indicated by parameter "m";OLIVETTI PR2;
+;;;4;;OLIVETTI PR2;
+1B 2D;;;;MEASURE DOCUMENT LENGTH;OLIVETTI PR2;
+1B 7D 2D;;;;MEASURE DOCUMENT WIDTH;OLIVETTI PR2;
+1B 21 47;;;;Select 9 or 24 pin graphics and DLL;OLIVETTI PR2;
+;n;byte;;;OLIVETTI PR2;
+;;;48;9 pin;OLIVETTI PR2;
+;;;49;24 pin;OLIVETTI PR2;
+1B 7D 65;;;;LOGOTYPE STORAGE;OLIVETTI PR2;
+;i;byte;;Logotype identifier. values from 1 to 255 can be used;OLIVETTI PR2;
+;n1;byte;;n1 and n2 define the amount of data to be stored ( n = n1 + n2 x 256 );OLIVETTI PR2;
+;n2;byte;;n1 and n2 define the amount of data to be stored ( n = n1 + n2 x 256 );OLIVETTI PR2;
+;@data;BinaryArray;;logo bitmap data;OLIVETTI PR2;
+;;;n1 + n2*256;;OLIVETTI PR2;
+1B 7D 66;;;;LOGOTYPE PRINTING;OLIVETTI PR2;
+;x;byte;;identifier of the logotype to be printed;OLIVETTI PR2;
+1B 7D 68;;;;REQUEST FOR THE IDENTIFIERS OF THE STORED LOGOTYPES;OLIVETTI PR2;
+1B 7D 6C;;;;CANCEL STORED LOGOTYPE;OLIVETTI PR2;
+;i;byte;;0 - cancel all the stored logotypes, 1-255 - logo ID;OLIVETTI PR2;
+1B 7D 67 ;;;;EXPANDED CHARACTER;OLIVETTI PR2;
+;n1;byte;;indicates the width expansion factor of the expanded character;OLIVETTI PR2;
+;n2;byte;;indicates the height expansion factor of the expanded character;OLIVETTI PR2;
+1B 7D 6D;;;;READ MARKER COMMAND;OLIVETTI PR2;
+;n;byte;;Number of markers to be read (Max. 32);OLIVETTI PR2;
+;m1;byte;;Horizontal position in mm. of the center of the first marker from the document's physical left-hand margin;OLIVETTI PR2;
+;m2;byte;;Vertical position in mm. of the center of the marker line from the document's physical header;OLIVETTI PR2;
+;x;byte;;Spacing between markers expressed in mm;OLIVETTI PR2;
+1B 07 45;;;;SELECTS OLIVETTI EMULATION;OLIVETTI PR2;
+;n;byte;;;OLIVETTI PR2;
+;;;8;selects Olivetti emulation (PR2, PR40+ or PR2845);OLIVETTI PR2;
+1B 2F 39;;;;????????????????????;OLIVETTI PR2;
+8;;;;BACK SPACE;IBM PROPRINTER II;
+9;;;;Horizontal tabulation;IBM PROPRINTER II;
+0A;;;;LINE FEED FORWARD;IBM PROPRINTER II;
+0b;;;;Vertical tabulation;IBM PROPRINTER II;
+0C;;;;FORM FEED (REAR EJECTION);IBM PROPRINTER II;
+0D;;;;CR Carriage return;IBM PROPRINTER II;
+0e;;;;Double width (one line);IBM PROPRINTER II;
+0f;;;;17.1 cpi (Condensed);IBM PROPRINTER II;
+11;;;;Activate printer-system connection. Sets the printer "on-line" until a DC3 is received;IBM PROPRINTER II;
+12;;;;10 cpi (Pica);IBM PROPRINTER II;
+13;;;;Deactivate printer-system connection. The printer sends this command via the serial interface to indicate that the buffer is full;IBM PROPRINTER II;
+14;;;;Cancel double width (one line);IBM PROPRINTER II;
+18;;;;Clear print buffer;IBM PROPRINTER II;
+1B 07 45;;;;SELECTS OLIVETTI EMULATION;IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;;;8;selects Olivetti emulation (PR2, PR40+ or PR2845);IBM PROPRINTER II;
+1B 07 3E 4F;;;;Selects bottom of form (BOF);IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;;;8;selects the minimum printer bottom margin (non IBM), equal to 25/216" (2.94 mm);IBM PROPRINTER II;
+;;;1;selects "IBM LIKE" bottom margin, equal to 83/216" (9.76 mm).;IBM PROPRINTER II;
+1B 2D;;;;Underline;IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;;;1;Activate underline;IBM PROPRINTER II;
+;;;49;Activate underline;IBM PROPRINTER II;
+;;;0;deactivate underline;IBM PROPRINTER II;
+;;;48;deactivate underline;IBM PROPRINTER II;
+1B 30;;;;Sets the 1/8" (3.175 mm) line feed;IBM PROPRINTER II;
+1B 31;;;;Sets the 7/72" (2,47 mm) line feed;IBM PROPRINTER II;
+1B 32;;;;Sets the line feed of the value according to ESC A n, when it is followed by this command. Sent alone, it sets the 1/6" (4,23 mm) line feed;IBM PROPRINTER II;
+1B 33;;;;Sets the n/216" (0,1176 x n mm) line feed;IBM PROPRINTER II;
+1B 34;;;;Module heading;IBM PROPRINTER II;
+1B 35;;;;Automatic line feed after CR;IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;;;1;automatic LF after CR (CR=CR+LF).;IBM PROPRINTER II;
+;;;49;automatic LF after CR (CR=CR+LF).;IBM PROPRINTER II;
+;;;0;no automatic LF after CR (CR=CR).;IBM PROPRINTER II;
+;;;48;no automatic LF after CR (CR=CR).;IBM PROPRINTER II;
+1B 36;;;;Table 2 of character set;IBM PROPRINTER II;
+1B 37;;;;Table 1 of character set;IBM PROPRINTER II;
+1B 3A;;;;Sets 12 characters per inch starting from the current position;IBM PROPRINTER II;
+1B 3D;;;;Customized characters (DLL);IBM PROPRINTER II;
+;n;Word;;Number of characters to be created and loaded with the current code sequence;IBM PROPRINTER II;
+1B 41;;;;Line feed = n/72";IBM PROPRINTER II;
+;n;Byte;;Sets the n/72" (0,3528 x n mm) line feed. N = 1-85. n = 0 does not change the current line feed;IBM PROPRINTER II;
+1B 42;;;;Vertical tabulation program;IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;k;Byte;;;IBM PROPRINTER II;
+1B 43;;;;Form length as no. lines;IBM PROPRINTER II;
+;n;Byte;;form length as a number of print lines;IBM PROPRINTER II;
+1B 43 00;;;;Form length in inches;IBM PROPRINTER II;
+;n;Byte;;form length directly in inches (30 max);IBM PROPRINTER II;
+1B 44;;;;Horizontal tabulation program;IBM PROPRINTER II;
+;n;Byte;;n indicate the columns in which the tabulation stops will be positioned (the left edge is column 1).;IBM PROPRINTER II;
+;k;Byte;;tabulation program with a maximum of 28 stops;IBM PROPRINTER II;
+1B 45;;;;Bold face;IBM PROPRINTER II;
+1B 46;;;;Cancel bold face;IBM PROPRINTER II;
+1B 47;;;;Prints the current font in double pass;IBM PROPRINTER II;
+1B 48;;;;Cancels printing selected by ESC G.;IBM PROPRINTER II;
+1B 49;;;;Select print mode;IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;;;0;Draft with standard character set;IBM PROPRINTER II;
+;;;1;12 cpi Fast Font with standard character set;IBM PROPRINTER II;
+;;;2;SANS SERIF with standard character set;IBM PROPRINTER II;
+;;;3;ROMAN with standard character set;IBM PROPRINTER II;
+;;;4;Draft with DRAFT DLL character set;IBM PROPRINTER II;
+;;;5;Fast Font with DRAFT DLL character set;IBM PROPRINTER II;
+;;;6;SANS SERIF with DRAFT DLL character set;IBM PROPRINTER II;
+;;;7;ROMAN with NLQ character set;IBM PROPRINTER II;
+1B 4A;;;;One n/216" line feed (for graphics);IBM PROPRINTER II;
+;n;Byte;;Prints the buffer and feeds the paper by n/216". "n" must be a multiple of 3 (minimum line feed). In 8-needle graphic printing, the value 24/216" ensures that the lines meet perfectly;IBM PROPRINTER II;
+1B 4B;;;;normal resolution BIM (60 dots per inch);IBM PROPRINTER II;
+;n1;Byte;;data length;IBM PROPRINTER II;
+;n2;Byte;;data length;IBM PROPRINTER II;
+;@data;BinaryArray;;;IBM PROPRINTER II;
+;;;n1 + n2*256;;IBM PROPRINTER II;
+1B 4C;;;;double resolution BIM;IBM PROPRINTER II;
+;n1;Byte;;data length;IBM PROPRINTER II;
+;n2;Byte;;data length;IBM PROPRINTER II;
+;@data;BinaryArray;;;IBM PROPRINTER II;
+;;;n1 + n2*256;;IBM PROPRINTER II;
+1B 4E;;;;Bottom of form;IBM PROPRINTER II;
+;n;Byte;;Defines the number of line feeds (of the current value) not to be printed (to be skipped) between the end of the current page and the start of the next (bottom margin + top of form).;IBM PROPRINTER II;
+1B 4F;;;;Cancel bottom of form;IBM PROPRINTER II;
+1B 50;;;;Proportional spacing;IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;;;1;sets proportional spacing;IBM PROPRINTER II;
+;;;49;sets proportional spacing;IBM PROPRINTER II;
+;;;0;cancels proportional spacing;IBM PROPRINTER II;
+;;;48;cancels proportional spacing;IBM PROPRINTER II;
+1B 51 03;;;;Deactivate printer-system connection. Sets the printer "off-line" (in LOCAL), until the DC1;IBM PROPRINTER II;
+1B 52;;;;Cancel tabulation stop;IBM PROPRINTER II;
+1B 53;;;;Superscript/subscript;IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;;;1;subscript;IBM PROPRINTER II;
+;;;49;subscript;IBM PROPRINTER II;
+;;;0;superscript;IBM PROPRINTER II;
+;;;48;superscript;IBM PROPRINTER II;
+1B 54;;;;Cancel superscript/subscript. Cancels the two settings obtained by ESC S n;IBM PROPRINTER II;
+1B 55;;;;Uni/bidirectional printing;IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;;;1;unidirectional;IBM PROPRINTER II;
+;;;49;unidirectional;IBM PROPRINTER II;
+;;;0;bidirectional;IBM PROPRINTER II;
+;;;48;bidirectional;IBM PROPRINTER II;
+1B 57;;;;Double width (continued);IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;;;1;Sets double width;IBM PROPRINTER II;
+;;;49;Sets double width;IBM PROPRINTER II;
+;;;0;cancels double width;IBM PROPRINTER II;
+;;;48;cancels double width;IBM PROPRINTER II;
+1B 58;;;;Left and right margins;IBM PROPRINTER II;
+;n1;Byte;;number of the column, in the current print pitch, for the left margin.;IBM PROPRINTER II;
+;n2;Byte;;number of the column, in the current print pitch, for the right margin.;IBM PROPRINTER II;
+1B 59;;;;Double resolution BIM (120 dots per inch);IBM PROPRINTER II;
+;n;Word;;data length;IBM PROPRINTER II;
+;@data;BinaryArray;;;IBM PROPRINTER II;
+;;;n1 + n2*256;?????????;IBM PROPRINTER II;
+1B 5A;;;;Quadruple resolution BIM (240 dots per inch);IBM PROPRINTER II;
+;n;Word;;data length;IBM PROPRINTER II;
+;@data;BinaryArray;;;IBM PROPRINTER II;
+;;;n1 + n2*256;;IBM PROPRINTER II;
+1B 5B 40 04 00;;;;Double height/width;IBM PROPRINTER II;
+;m1;Byte;;;IBM PROPRINTER II;
+;;;0;Sets double height and/or double width for the characters printed, with or without changing the line feed;IBM PROPRINTER II;
+;m2;Byte;;;IBM PROPRINTER II;
+;;;0;;IBM PROPRINTER II;
+;m3;Byte;;height of the characters and the line feed;IBM PROPRINTER II;
+;;;0;No change with respect to the current settings 1 unchanged line feed, normal height;IBM PROPRINTER II;
+;;;2;Unchanged line feed, double height;IBM PROPRINTER II;
+;;;16;Single line feed, unchanged height;IBM PROPRINTER II;
+;;;17;Single line feed, normal height;IBM PROPRINTER II;
+;;;18;Single line feed, double height;IBM PROPRINTER II;
+;;;32;Double line feed, unchanged height;IBM PROPRINTER II;
+;;;33;Double line feed, normal height;IBM PROPRINTER II;
+;;;34;Double line feed, double height;IBM PROPRINTER II;
+;m4;Byte;;width of the characters;IBM PROPRINTER II;
+;;;0;Unchanged width;IBM PROPRINTER II;
+;;;1;Normal width;IBM PROPRINTER II;
+;;;2;Double width;IBM PROPRINTER II;
+1B 5C;;;;Print characters from table 3;IBM PROPRINTER II;
+;n;Word;;number of data items - (n2 x 256);IBM PROPRINTER II;
+;@data;BinaryArray;;;IBM PROPRINTER II;
+;;;n1+n2*256;?????????;IBM PROPRINTER II;
+1B 5E;;;;Print a character from table 3. Has the same function as the command ESC \ .., but only enables one character to be printed;IBM PROPRINTER II;
+1B 5F;;;;Overline;IBM PROPRINTER II;
+;n;Byte;;;IBM PROPRINTER II;
+;;;1;Activate overline;IBM PROPRINTER II;
+;;;49;Activate overline;IBM PROPRINTER II;
+;;;0;deactivate overline;IBM PROPRINTER II;
+;;;48;deactivate overline;IBM PROPRINTER II;
