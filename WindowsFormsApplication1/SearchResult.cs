@@ -270,7 +270,7 @@ public class ParseEscPos
                     for (byte i2 = 0; i2 < 8; i2++)
                     {
                         bitName.Add("bit" + i2.ToString());
-                        bitValue.Add(Accessory.GetBit(Accessory.ConvertHexToByte(paramValue[parameter]), i2).ToString());
+                        bitValue.Add(Accessory.GetBit(l, i2).ToString());
                         bitDescription.Add(_commandDataBase.Rows[paramDbLineNum[parameter] + i2 + 1][CSVColumns.Description].ToString());
                     }
                 }
