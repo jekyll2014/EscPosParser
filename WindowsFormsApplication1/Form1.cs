@@ -194,9 +194,9 @@ namespace WindowsFormsApplication1
                             {
                                 row = ResultDatabase.NewRow();
                                 //row[ResultColumns.Name] = ParseEscPos.paramName[i] + "[" + i1.ToString() + "]";
-                                row[ResultColumns.Value] = ParseEscPos.bitValue[i1];
-                                row[ResultColumns.Type] = ParseEscPos.bitName[i1];
-                                row[ResultColumns.Desc] = ParseEscPos.bitDescription[i1];
+                                row[ResultColumns.Value] = ParseEscPos.bitValue[i][i1];
+                                row[ResultColumns.Type] = ParseEscPos.bitName[i][i1];
+                                row[ResultColumns.Desc] = ParseEscPos.bitDescription[i][i1];
                                 ResultDatabase.Rows.Add(row);
                             }
                         }
@@ -281,9 +281,9 @@ namespace WindowsFormsApplication1
                         {
                             for (int i1 = 0; i1 < 8; i1++)
                             {
-                                saveStr.Append("\t\t[" + ParseEscPos.bitName[i1] + "]\" = \"");
-                                saveStr.Append(ParseEscPos.bitValue + "\" - \"");
-                                saveStr.Append(ParseEscPos.bitDescription);
+                                saveStr.Append("\t\t[" + ParseEscPos.bitName[i][i1] + "]\" = \"");
+                                saveStr.Append(ParseEscPos.bitValue[i][i1] + "\" - \"");
+                                saveStr.Append(ParseEscPos.bitDescription[i][i1]);
                                 saveStr.Append("\"\r\n");
                             }
                         }

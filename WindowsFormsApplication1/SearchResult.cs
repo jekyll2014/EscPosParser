@@ -50,9 +50,9 @@ public class ParseEscPos
     //parameter value
     public static List<string> paramValue = new List<string>();
 
-    public static List<string> bitName = new List<string>();
-    public static List<string> bitValue = new List<string>();
-    public static List<string> bitDescription = new List<string>();
+    public static List<List<string>> bitName = new List<List<string>>();
+    public static List<List<string>> bitValue = new List<List<string>>();
+    public static List<List<string>> bitDescription = new List<List<string>>();
 
     //Length of command+parameters text
     public static int commandBlockLength = 0;
@@ -181,6 +181,9 @@ public class ParseEscPos
         for (int parameter = 0; parameter < paramDbLineNum.Count; parameter++)
         {
             paramPosition.Add(commandPosition[_commandNum] + ResultLength(_commandNum));
+            bitName.Add(new List<string>());
+            bitValue.Add(new List<string>());
+            bitDescription.Add(new List<string>());
 
             //collect predefined RAW values
             List<string> predefinedParamsRaw = new List<string>();
@@ -269,9 +272,9 @@ public class ParseEscPos
                     l = paramRAWValue[parameter].ToArray()[0];
                     for (byte i2 = 0; i2 < 8; i2++)
                     {
-                        bitName.Add("bit" + i2.ToString());
-                        bitValue.Add(Accessory.GetBit(l, i2).ToString());
-                        bitDescription.Add(_commandDataBase.Rows[paramDbLineNum[parameter] + i2 + 1][CSVColumns.Description].ToString());
+                        bitName[parameter].Add("bit" + i2.ToString());
+                        bitValue[parameter].Add(Accessory.GetBit(l, i2).ToString());
+                        bitDescription[parameter].Add(_commandDataBase.Rows[paramDbLineNum[parameter] + i2 + 1][CSVColumns.Description].ToString());
                     }
                 }
                 else
