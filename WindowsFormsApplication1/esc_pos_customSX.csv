@@ -550,7 +550,7 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 ;;;82;;;
 ;;;84;;GAM;
 ;n;Byte;;;GAM;
-;;;80;Sets the length of the page expressed in points (string number). The resolution used for the length is 204 dpi;;
+;;;80;Sets the min. Length of the page expressed in points (string number). The resolution used for the length is 204 dpi;;
 ;;;82;Sets the maximum page length.;;
 ;;;84;sets the page width area;GAM;
 1B 2A 62;;;;Activates/Deactivates compression of data.;GAM;

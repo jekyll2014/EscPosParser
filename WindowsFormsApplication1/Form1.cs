@@ -164,6 +164,32 @@ namespace WindowsFormsApplication1
                 //int currentCommand = 0;  //temp const to select 1st command found
                 int currentCommand = 0;
                 if (sender == listBox_commands) currentCommand = listBox_commands.SelectedIndex;
+                else if (ParseEscPos.commandName.Count > 1)
+                {
+                    int _saved_pos = textBox_code.SelectionStart;
+                    bool[,] err = new bool[ParseEscPos.commandName.Count,2];
+                    for (int i = 0; i < ParseEscPos.commandName.Count; i++)
+                    {
+                        //есть ли ошибка в поиске параметров
+                        err[i,0] = ParseEscPos.FindParameter(i);
+                        //если мы еще в пределах поля данных
+                        if ((ParseEscPos.commandPosition[currentCommand] + ParseEscPos.commandBlockLength) * 3 < textBox_code.Text.Length)
+                        {
+                            //ищем след. команду и, возможно, параметры
+                            //есть ли ошибка в поиске след. команды
+                            err[i,1] = ParseEscPos.FindCommand(_saved_pos / 3+ ParseEscPos.commandBlockLength, comboBox_printerType.SelectedItem.ToString());
+                            //возможно, стоит поискать параметры след. команды и проверить их на ошибки тоже
+
+                            //возвращаем поиск команды в исходное состояние для след. итерации
+                            textBox_code.SelectionStart = _saved_pos;
+                            ParseEscPos.FindCommand(textBox_code.SelectionStart / 3, comboBox_printerType.SelectedItem.ToString());
+                        }
+                        else err[i,1] = err[i,0];
+                        //обрабатываем результаты проверок
+                        //если параметры текущей и след. команда нашлись, то выбираем текущую
+                        if (err[i,1] == err[i,0] == true) currentCommand = i;
+                    }
+                }
                 ParseEscPos.FindParameter(currentCommand);
                 if (sender != button_auto)  //only update interface if it's no auto-parsing mode
                 {
@@ -175,7 +201,7 @@ namespace WindowsFormsApplication1
                             listBox_commands.Items.Add(ParseEscPos.commandName[i] + "[" + ParseEscPos.commandPrinterModel[i] + "]");
                         }
                     }
-                    listBox_commands.SelectedItem = currentCommand;
+                    listBox_commands.SelectedIndex = currentCommand;
                     textBox_commandDesc.Text = ParseEscPos.commandDesc[currentCommand];
                     for (int i = 0; i < ParseEscPos.paramName.Count; i++)
                     {

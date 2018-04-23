@@ -428,7 +428,7 @@ public class ParseEscPos
             }
         }
         ResultLength(_commandNum);
-        return true;
+        return !errors;
     }
 
     internal static void ClearCommand()
