@@ -199,7 +199,8 @@ public class ParseEscPos
             foreach (string expresion in predefinedParamsRaw)
             {
                 int val = 0;
-                if (expresion.StartsWith("?"))  //select formula basing on parameter value "?k=1:n+n1 ?k-2:n*n1"
+                //select formula basing on parameter value "?k=1:n+n1 ?k-2:n*n1"
+                if (expresion.StartsWith("?"))  
                 {
                     string[] tmpstr = expresion.Trim().Replace("\r", "").Replace("\n", "").Split('?');
                     foreach (string str in tmpstr)
@@ -209,7 +210,7 @@ public class ParseEscPos
                             string equation = str.Substring(0, str.IndexOf(':')); //calculate equation if needed                            
                             for (int i2 = 0; i2 < paramName.Count - 1; i2++)  //insert all parameters before current into equation
                             {
-                                equation = equation.Replace(paramName[i2], paramValue[i2].ToString());
+                                equation = equation.Replace(paramName[i2], paramValue[i2]);
                                 equation = equation.Replace('=', '-');
                             }
                             if (Accessory.Evaluate(equation) == 0)
@@ -217,7 +218,7 @@ public class ParseEscPos
                                 string equation2 = str.Substring(str.IndexOf(':') + 1).Trim();
                                 for (int i3 = 0; i3 < paramName.Count - 1; i3++)
                                 {
-                                    equation2 = equation2.Replace(paramName[i3], paramValue[i3].ToString());
+                                    equation2 = equation2.Replace(paramName[i3], paramValue[i3]);
                                 }
                                 val = (int)Accessory.Evaluate(equation2);
                             }
@@ -230,7 +231,7 @@ public class ParseEscPos
                     //insert all parameters before current into equation
                     for (int i2 = 0; i2 < paramName.Count - 1; i2++)
                     {
-                        equation = equation.Replace(paramName[i2], paramValue[i2].ToString());
+                        equation = equation.Replace(paramName[i2], paramValue[i2]);
                     }
                     val = (int)Accessory.Evaluate(equation);// = str.Substring(str.IndexOf(':') + 1);
                 }
