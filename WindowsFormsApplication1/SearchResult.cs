@@ -162,7 +162,7 @@ public class ParseEscPos
     public static bool FindParameter(int _commandNum)
     {
         ClearParameters();
-        if (_commandNum < 0 && _commandNum >= commandName.Count - 1) return false;
+        if (_commandNum < 0 || _commandNum >= commandName.Count) return false;
         //collect parameters
         int _stopSearch = commandDbLineNum[_commandNum] + 1;
         while (_stopSearch < _commandDataBase.Rows.Count && _commandDataBase.Rows[_stopSearch][CSVColumns.CommandName].ToString() == "") _stopSearch++;

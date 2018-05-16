@@ -201,7 +201,9 @@ namespace WindowsFormsApplication1
                             listBox_commands.Items.Add(ParseEscPos.commandName[i] + "[" + ParseEscPos.commandPrinterModel[i] + "]");
                         }
                     }
+                    this.listBox_commands.SelectedIndexChanged -= new EventHandler(this.ListBox_commands_SelectedIndexChanged);
                     listBox_commands.SelectedIndex = currentCommand;
+                    this.listBox_commands.SelectedIndexChanged += new EventHandler(this.ListBox_commands_SelectedIndexChanged);
                     textBox_commandDesc.Text = ParseEscPos.commandDesc[currentCommand];
                     for (int i = 0; i < ParseEscPos.paramName.Count; i++)
                     {
