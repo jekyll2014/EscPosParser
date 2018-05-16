@@ -39,7 +39,7 @@ Command (hex);Parameter Name;Parameter type;Parameter value (dec);Description;Pr
 ;;;3;;;
 ;c1;Byte;;C1 specifies the beginning character code for the deinition, if c2 < c1, the command is not executed. range is from ASCII 0x20(32) to 0x7E (126) (95 characters).;VKP80II-SX;
 ;c2;Byte;;C2 specifies the final code, if c2 < c1, the command is not executed;VKP80II-SX;
-;@data;BinaryArray;;;;
+;@data;BinaryArray;;character map.;;
 ;;;@y*2*(c2-c1+1);each character is 2*3 bytes;VKP80II-SX;
 1B 2D;;;;Turn underline mode on/off;VKP80II-SX;
 ;n;Byte;;;;
@@ -214,7 +214,7 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 ;;;32;24 dot single density (nL + nH x 256) x 3;;
 ;;;33;24 dot double density (nL + nH x 256) x 3;;
 ;n;Word;;;;
-;@data;BinaryArray;;;;
+;@data;BinaryArray;;image data;;
 ;;;?m=0:n
 ?m=1:n
 ?m=32:n*3
@@ -222,7 +222,7 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 1D 2A;;;;Define dowloaded bit image;VKP80II-SX;
 ;x;Byte;;x specifies the number of dots in the horizontal direction. The number of dots in the horizontal direction is x * 8;;
 ;y;Byte;;y specifies the number of dots in the vertical direction. The number of dots in the vertical direction is y * 8;VKP80II-SX;
-;@data;BinaryArray;;;;
+;@data;BinaryArray;;image data;;
 ;;;@x*y;;VKP80II-SX;
 1D 2F;;;;Print dowloaded bit image;VKP80II-SX;
 ;m;Byte;;;;
@@ -244,10 +244,10 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 ;;;49;Double-width;VKP80II-SX;
 ;;;50;Double-height;VKP80II-SX;
 ;;;51;Quadruple;VKP80II-SX;
-;x;Word;; xL, xH selects the number of data bits (xL + xH * 256) in the horizontal direction for the bit image;VKP80II-SX;
-;y;Word;; yL, yH selects the number of data bits (yL + yH * 256) in the vertical direction for the bit image;VKP80II-SX;
-;@data;BinaryArray;;;;
-;;;@x*y;data of the image;VKP80II-SX;
+;x;Word;;xL, xH selects the number of data bits (xL + xH * 256) in the horizontal direction for the bit image;VKP80II-SX;
+;y;Word;;yL, yH selects the number of data bits (yL + yH * 256) in the vertical direction for the bit image;VKP80II-SX;
+;@data;BinaryArray;;image data;;
+;;;@x*y;;VKP80II-SX;
 10 04;;;;Real-time status transmission;VKP80II-SX;
 ;n;Byte;;;;
 ;;;1;transmit printer status;;
@@ -304,6 +304,7 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 ;;;17716;Function 069 AZTEC: Specify the error correction level [n];VKP80II-SX;
 ;;;20532;Function 080 AZTEC: Store the received data in the barcode save area [m][p-3];;
 ;;;20788;Function 081 AZTEC: Print the barcode [m];;
+;;;;;;
 ;n;Byte;;parameter defined for function above.;;
 1D 48;;;;Select printing position of Human Readable Interpretation (HRI) characters;VKP80II-SX;
 ;n;Byte;;;;
@@ -324,7 +325,7 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 1D 68;;;;Set barcode height;VKP80II-SX;
 ;n;Byte;;n specifies the number of vertical dots;;
 1D 6B;;;;Print barcode;VKP80II-SX;
-;m;Byte;;;;
+;m;Byte;;Barcode type: ;;
 ;;;0;barcode system UPC-A;;
 ;;;1;UPC-E;VKP80II-SX;
 ;;;2;EAN13 (JAN);VKP80II-SX;
@@ -345,9 +346,9 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 ;;;72;CODE93;VKP80II-SX;
 ;;;73;CODE128;VKP80II-SX;
 ;;;90;CODE32;VKP80II-SX;
-;n;Byte;;;VKP80II-SX;
+;n;Byte;;number of data bytes;VKP80II-SX;
 ;@data;BinaryArray;;;;
-;;;?m=0:1
+;;;?m=0:11
 ?m=1:1
 ?m=2:1
 ?m=3:1
@@ -396,7 +397,15 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 1D 56 41;;;;Select cut mode;VKP80II-SX;
 ;n;Byte;;Form feed (cut position + [ n * vertical motion unit]) and total cut;;
 1D 65;;;;Ejector commands;VKP80II-SX;
-;n;Byte;;bit field of the parameters;;
+;n;Byte;;;;
+;;;1;None;;
+;;;2;Ticket retracted (only if Paper retracting is enabled);;
+;;;5;Eject ticket;;
+;;;6;Transmit the status byte of the ejector;;
+;;;18;Disable the dispenser continuous mode, sets the normal functioning: when printing the ticket
+remaines in the outlet paper mouth, unitl a cut command or eject command will be sent.;;
+;;;20;Enable the dispenser continuous mode: when printing the ticket doesn't remain in the outlet
+paper mouth, but continuously presented it.;;
 1D 65 03;;;;Ejector commands;VKP80II-SX;
 ;m;Byte;;Ticket produced with m steps (1 step = 7.3 mm);;
 1D 65 08;;;;Ejector commands;VKP80II-SX;
@@ -424,7 +433,7 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 ;;;1;Save logo 1 in the lash bank;;
 ;;;2;Save logo 2 in the lash bank;;
 ;n2;Word;;Receive [nL + (nH * 256)] word;VKP80II-SX;
-;@data;BinaryArray;;The number of received data bytes is [nL + (nH x 256)] x 2;;
+;@data;BinaryArray;;Image data. The number of received data bytes is [nL+(nH*256)]*2;;
 ;;;@n2*2;;VKP80II-SX;
 1C C0;;;;Prints graphic logo in the graphic page;VKP80II-SX;
 ;x;Word;;(x,y)  coordinates of the graphic page point where must be printed the graphic logo part;;
@@ -545,14 +554,14 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 ;n;Word;;sets the absolute print position to [( nL + nH* 256) * (vertical or horizontal motion unit)] inches;VKP80II-SX;
 1D 5C;;;;Set relative vertical print position in page mode;VKP80II-SX;
 ;n;Word;; sets the distance from the current position to [(nL + nH * 256) * vertical or horizontal motion unit] inches;VKP80II-SX;
-1B 26 6C;;;;Set the page length/max. Page length;GAM;
+1B 26 6C;;;;Set the page length/max. page length;GAM;
 ;@string;DecString;;;;
 ;;;80;;;
 ;;;82;;;
 ;;;84;;GAM;
 ;n;Byte;;;GAM;
-;;;80;Sets the min. Length of the page expressed in points (string number). The resolution used for the length is 204 dpi;;
-;;;82;Sets the maximum page length.;;
+;;;80;Sets the min. length of the page expressed in points (string). The resolution used for the length is 204 dpi;;
+;;;82;Sets the maximum page length. Define a roll Page, the printer will stop as soon as the graphic ends;;
 ;;;84;sets the page width area;GAM;
 1B 2A 62;;;;Activates/Deactivates compression of data.;GAM;
 ;@string;DecString;;;;
@@ -561,7 +570,7 @@ HEX Decimal HEIGHT    HEX Decimal WIDTH
 ;n;Byte;;;GAM;
 ;;;77;Activates/Deactivates compression of data. @string = compression mode;;
 ;;;87;Receives graphics data. @string = number of bytes to be read compressed/uncompressed;GAM;
-;@data;BinaryArray;;;;
+;@data;BinaryArray;;image data;;
 ;;;?n=77:0
 ?n=87:@string;;GAM;
 1B 2A 70;;;;Set absolute positioning on the X/Y axis;GAM;
