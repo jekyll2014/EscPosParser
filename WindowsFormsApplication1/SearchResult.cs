@@ -177,6 +177,7 @@ public class ParseEscPos
             }
         }
 
+        errors = false;  //Error in parameter found
         //process each parameter
         for (int parameter = 0; parameter < paramDbLineNum.Count; parameter++)
         {
@@ -200,7 +201,7 @@ public class ParseEscPos
             {
                 int val = 0;
                 //select formula basing on parameter value "?k=1:n+n1 ?k-2:n*n1"
-                if (expresion.StartsWith("?"))  
+                if (expresion.StartsWith("?"))
                 {
                     string[] tmpstr = expresion.Trim().Replace("\r", "").Replace("\n", "").Split('?');
                     foreach (string str in tmpstr)
@@ -245,7 +246,6 @@ public class ParseEscPos
             //get parameter from text
             int tmpStrLength = 0;
             bool predefinedFound = false; //Matching predefined parameter found and it's number is in "predefinedParameterMatched"
-            errors = false;  //Error in parameter found
             string errMessage = "";
             byte l = 0, h = 0;
             int predefinedParameterMatched = 0;
@@ -374,7 +374,7 @@ public class ParseEscPos
                     predefinedParameterMatched = 0;
                     if (paramPosition[parameter] + predefinedParamsVal[0] <= sourceData.Count)
                     {
-                        paramRAWValue.Add(sourceData.GetRange(paramPosition[parameter], predefinedParamsVal[0]));
+                        paramRAWValue.Add(sourceData.GetRange(paramPosition[parameter], (byte)predefinedParamsVal[0]));
                     }
                     else
                     {
@@ -420,6 +420,7 @@ public class ParseEscPos
                         i1 = predefinedParamsVal.Count;
                     }
                 }
+                if (predefinedParamsVal.Count > 0 && predefinedFound == false) errors = true; //if no parameters match predefined
             }
             //get description for predefined parameter
             //if description is within current command parameters group

@@ -167,27 +167,27 @@ namespace WindowsFormsApplication1
                 else if (ParseEscPos.commandName.Count > 1)
                 {
                     int _saved_pos = textBox_code.SelectionStart;
-                    bool[,] err = new bool[ParseEscPos.commandName.Count,2];
+                    bool[,] err = new bool[ParseEscPos.commandName.Count, 2];
                     for (int i = 0; i < ParseEscPos.commandName.Count; i++)
                     {
                         //есть ли ошибка в поиске параметров
-                        err[i,0] = ParseEscPos.FindParameter(i);
+                        err[i, 0] = ParseEscPos.FindParameter(i);
                         //если мы еще в пределах поля данных
                         if ((ParseEscPos.commandPosition[currentCommand] + ParseEscPos.commandBlockLength) * 3 < textBox_code.Text.Length)
                         {
                             //ищем след. команду и, возможно, параметры
                             //есть ли ошибка в поиске след. команды
-                            err[i,1] = ParseEscPos.FindCommand(_saved_pos / 3+ ParseEscPos.commandBlockLength, comboBox_printerType.SelectedItem.ToString());
+                            err[i, 1] = ParseEscPos.FindCommand(_saved_pos / 3 + ParseEscPos.commandBlockLength, comboBox_printerType.SelectedItem.ToString());
                             //возможно, стоит поискать параметры след. команды и проверить их на ошибки тоже
 
                             //возвращаем поиск команды в исходное состояние для след. итерации
                             textBox_code.SelectionStart = _saved_pos;
                             ParseEscPos.FindCommand(textBox_code.SelectionStart / 3, comboBox_printerType.SelectedItem.ToString());
                         }
-                        else err[i,1] = err[i,0];
+                        else err[i, 1] = err[i, 0];
                         //обрабатываем результаты проверок
                         //если параметры текущей и след. команда нашлись, то выбираем текущую
-                        if (err[i,1] == err[i,0] == true) currentCommand = i;
+                        if (err[i, 1] == err[i, 0] && err[i, 0] == true) currentCommand = i;
                     }
                 }
                 ParseEscPos.FindParameter(currentCommand);
@@ -277,9 +277,8 @@ namespace WindowsFormsApplication1
                 //run "Find" button event as "Auto"
                 textBox_code.SelectionStart = textBox_code.SelectionStart + textBox_code.SelectionLength;
                 Button_find_Click(button_auto, EventArgs.Empty);
-                if (ParseEscPos.commandName.Count > 0)  //?????????????
+                if (ParseEscPos.commandName.Count > 0)
                 {
-                    ParseEscPos.FindParameter(0);  //?????????????
                     //Save ASCII string if collected till now
                     if (asciiString.Length != 0)
                     {
@@ -493,6 +492,7 @@ namespace WindowsFormsApplication1
             else if (openFileDialog.Title == "Open CSV database") //hex text read
             {
                 ReadCsv(openFileDialog.FileName);
+                ParseEscPos.Init(Accessory.ConvertHexToByteArray(textBox_code.Text), CommandDatabase);
             }
         }
 

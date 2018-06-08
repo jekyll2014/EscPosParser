@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.textBox_code = new System.Windows.Forms.TextBox();
             this.dataGridView_commands = new System.Windows.Forms.DataGridView();
             this.dataGridView_result = new System.Windows.Forms.DataGridView();
@@ -107,14 +107,14 @@
             this.dataGridView_commands.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView_commands.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView_commands.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_commands.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_commands.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView_commands.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_commands.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView_commands.Location = new System.Drawing.Point(0, 0);
@@ -240,49 +240,49 @@
             // loadBinToolStripMenuItem
             // 
             this.loadBinToolStripMenuItem.Name = "loadBinToolStripMenuItem";
-            this.loadBinToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.loadBinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadBinToolStripMenuItem.Text = "Load binary file";
             this.loadBinToolStripMenuItem.Click += new System.EventHandler(this.LoadBinToolStripMenuItem_Click);
             // 
             // loadHexToolStripMenuItem
             // 
             this.loadHexToolStripMenuItem.Name = "loadHexToolStripMenuItem";
-            this.loadHexToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.loadHexToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadHexToolStripMenuItem.Text = "Load HEX text file";
             this.loadHexToolStripMenuItem.Click += new System.EventHandler(this.LoadHexToolStripMenuItem_Click);
             // 
             // saveBinFileToolStripMenuItem
             // 
             this.saveBinFileToolStripMenuItem.Name = "saveBinFileToolStripMenuItem";
-            this.saveBinFileToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.saveBinFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveBinFileToolStripMenuItem.Text = "Save binary file";
             this.saveBinFileToolStripMenuItem.Click += new System.EventHandler(this.SaveBinFileToolStripMenuItem_Click);
             // 
             // saveHexFileToolStripMenuItem
             // 
             this.saveHexFileToolStripMenuItem.Name = "saveHexFileToolStripMenuItem";
-            this.saveHexFileToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.saveHexFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveHexFileToolStripMenuItem.Text = "Save HEX text file";
             this.saveHexFileToolStripMenuItem.Click += new System.EventHandler(this.SaveHexFileToolStripMenuItem_Click);
             // 
             // LoadCSVToolStripMenuItem
             // 
             this.LoadCSVToolStripMenuItem.Name = "LoadCSVToolStripMenuItem";
-            this.LoadCSVToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.LoadCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.LoadCSVToolStripMenuItem.Text = "Load database";
             this.LoadCSVToolStripMenuItem.Click += new System.EventHandler(this.LoadCSVToolStripMenuItem_Click);
             // 
             // saveCSVToolStripMenuItem
             // 
             this.saveCSVToolStripMenuItem.Name = "saveCSVToolStripMenuItem";
-            this.saveCSVToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.saveCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveCSVToolStripMenuItem.Text = "Save database";
             this.saveCSVToolStripMenuItem.Click += new System.EventHandler(this.SaveCSVToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
