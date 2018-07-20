@@ -516,5 +516,6 @@ namespace WindowsFormsApplication1
             enableFileEditToolStripMenuItem.Checked = !enableFileEditToolStripMenuItem.Checked;
             textBox_code.ReadOnly = !enableFileEditToolStripMenuItem.Checked;
         }
+
     }
 }
