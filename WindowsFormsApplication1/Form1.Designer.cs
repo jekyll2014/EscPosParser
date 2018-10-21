@@ -93,7 +93,7 @@
             this.textBox_code.Name = "textBox_code";
             this.textBox_code.ReadOnly = true;
             this.textBox_code.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_code.Size = new System.Drawing.Size(239, 254);
+            this.textBox_code.Size = new System.Drawing.Size(237, 252);
             this.textBox_code.TabIndex = 0;
             this.textBox_code.Text = resources.GetString("textBox_code.Text");
             this.textBox_code.Leave += new System.EventHandler(this.TextBox_code_Leave);
@@ -123,7 +123,7 @@
             this.dataGridView_commands.ReadOnly = true;
             this.dataGridView_commands.RowHeadersVisible = false;
             this.dataGridView_commands.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_commands.Size = new System.Drawing.Size(792, 289);
+            this.dataGridView_commands.Size = new System.Drawing.Size(788, 285);
             this.dataGridView_commands.TabIndex = 2;
             // 
             // dataGridView_result
@@ -142,7 +142,7 @@
             this.dataGridView_result.ReadOnly = true;
             this.dataGridView_result.RowHeadersVisible = false;
             this.dataGridView_result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_result.Size = new System.Drawing.Size(545, 133);
+            this.dataGridView_result.Size = new System.Drawing.Size(543, 132);
             this.dataGridView_result.TabIndex = 3;
             // 
             // button_auto
@@ -208,7 +208,7 @@
             this.textBox_commandDesc.Name = "textBox_commandDesc";
             this.textBox_commandDesc.ReadOnly = true;
             this.textBox_commandDesc.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_commandDesc.Size = new System.Drawing.Size(348, 99);
+            this.textBox_commandDesc.Size = new System.Drawing.Size(346, 94);
             this.textBox_commandDesc.TabIndex = 14;
             this.textBox_commandDesc.TabStop = false;
             // 
@@ -240,49 +240,49 @@
             // loadBinToolStripMenuItem
             // 
             this.loadBinToolStripMenuItem.Name = "loadBinToolStripMenuItem";
-            this.loadBinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadBinToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.loadBinToolStripMenuItem.Text = "Load binary file";
             this.loadBinToolStripMenuItem.Click += new System.EventHandler(this.LoadBinToolStripMenuItem_Click);
             // 
             // loadHexToolStripMenuItem
             // 
             this.loadHexToolStripMenuItem.Name = "loadHexToolStripMenuItem";
-            this.loadHexToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadHexToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.loadHexToolStripMenuItem.Text = "Load HEX text file";
             this.loadHexToolStripMenuItem.Click += new System.EventHandler(this.LoadHexToolStripMenuItem_Click);
             // 
             // saveBinFileToolStripMenuItem
             // 
             this.saveBinFileToolStripMenuItem.Name = "saveBinFileToolStripMenuItem";
-            this.saveBinFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveBinFileToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.saveBinFileToolStripMenuItem.Text = "Save binary file";
             this.saveBinFileToolStripMenuItem.Click += new System.EventHandler(this.SaveBinFileToolStripMenuItem_Click);
             // 
             // saveHexFileToolStripMenuItem
             // 
             this.saveHexFileToolStripMenuItem.Name = "saveHexFileToolStripMenuItem";
-            this.saveHexFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveHexFileToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.saveHexFileToolStripMenuItem.Text = "Save HEX text file";
             this.saveHexFileToolStripMenuItem.Click += new System.EventHandler(this.SaveHexFileToolStripMenuItem_Click);
             // 
             // LoadCSVToolStripMenuItem
             // 
             this.LoadCSVToolStripMenuItem.Name = "LoadCSVToolStripMenuItem";
-            this.LoadCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.LoadCSVToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.LoadCSVToolStripMenuItem.Text = "Load database";
             this.LoadCSVToolStripMenuItem.Click += new System.EventHandler(this.LoadCSVToolStripMenuItem_Click);
             // 
             // saveCSVToolStripMenuItem
             // 
             this.saveCSVToolStripMenuItem.Name = "saveCSVToolStripMenuItem";
-            this.saveCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveCSVToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.saveCSVToolStripMenuItem.Text = "Save database";
             this.saveCSVToolStripMenuItem.Click += new System.EventHandler(this.SaveCSVToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -336,7 +336,7 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
@@ -354,6 +354,7 @@
             // 
             // splitContainer3
             // 
+            this.splitContainer3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer3.Location = new System.Drawing.Point(0, 0);
             this.splitContainer3.Name = "splitContainer3";
@@ -366,12 +367,13 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dataGridView_result);
-            this.splitContainer3.Size = new System.Drawing.Size(545, 254);
-            this.splitContainer3.SplitterDistance = 117;
+            this.splitContainer3.Size = new System.Drawing.Size(547, 256);
+            this.splitContainer3.SplitterDistance = 116;
             this.splitContainer3.TabIndex = 17;
             // 
             // splitContainer4
             // 
+            this.splitContainer4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer4.Location = new System.Drawing.Point(0, 0);
             this.splitContainer4.Name = "splitContainer4";
@@ -385,7 +387,7 @@
             // 
             this.splitContainer4.Panel2.Controls.Add(this.label_commandDesc);
             this.splitContainer4.Panel2.Controls.Add(this.textBox_commandDesc);
-            this.splitContainer4.Size = new System.Drawing.Size(545, 117);
+            this.splitContainer4.Size = new System.Drawing.Size(547, 116);
             this.splitContainer4.SplitterDistance = 187;
             this.splitContainer4.TabIndex = 0;
             // 
@@ -398,12 +400,13 @@
             this.listBox_commands.HorizontalScrollbar = true;
             this.listBox_commands.Location = new System.Drawing.Point(3, 17);
             this.listBox_commands.Name = "listBox_commands";
-            this.listBox_commands.Size = new System.Drawing.Size(181, 95);
+            this.listBox_commands.Size = new System.Drawing.Size(177, 69);
             this.listBox_commands.TabIndex = 3;
             this.listBox_commands.SelectedIndexChanged += new System.EventHandler(this.ListBox_commands_SelectedIndexChanged);
             // 
             // splitContainer2
             // 
+            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 24);
             this.splitContainer2.Name = "splitContainer2";
