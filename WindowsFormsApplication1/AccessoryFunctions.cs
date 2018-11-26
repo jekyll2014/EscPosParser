@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -335,6 +338,7 @@ public partial class Accessory
 
     public static string ConvertByteArrayToHex(byte[] byteArr)
     {
+        if (byteArr == null) return "";
         StringBuilder hexStr = new StringBuilder();
         int i = 0;
         for (i = 0; i < byteArr.Length; i++)
@@ -347,6 +351,7 @@ public partial class Accessory
 
     public static string ConvertByteArrayToHex(byte[] byteArr, int Length)
     {
+        if (byteArr == null) return "";
         if (Length > byteArr.Length) Length = byteArr.Length;
         StringBuilder hexStr = new StringBuilder();
         int i = 0;
@@ -365,6 +370,7 @@ public partial class Accessory
 
     public static bool PrintableByteArray(byte[] str)
     {
+        if (str == null) return true;
         for (int i = 0; i < str.Length; i++)
         {
             if (str[i] < 32) return false;
@@ -386,6 +392,22 @@ public partial class Accessory
             else if (n < 32) return false;
         }
         return true;
+    }
+
+    public static string ConvertByteArrayToString(byte[] byteArr, int codePage = 866)
+    {
+        return Encoding.GetEncoding(codePage).GetString(byteArr);
+    }
+
+    public static string FilterZeroChar(string m, bool replaceWithSpace = true)
+    {
+        StringBuilder n = new StringBuilder();
+        for (int i = 0; i < m.Length; i++)
+        {
+            if (m[i] != 0) n.Append(m[i]);
+            else if (replaceWithSpace) n.Append(" ");
+        }
+        return n.ToString();
     }
 
     public static int CountSubString(string str, string subStr)
@@ -428,7 +450,7 @@ public partial class Accessory
 
     public static long EvaluateVariables(string expression, string[] variables = null, string[] values = null)  //calculate string formula
     {
-        if (variables != null)
+        if (variables != null && values != null)
         {
             if (variables.Length != values.Length) return 0;
             for (int i = 0; i < variables.Length; i++) expression = expression.Replace(variables[i], values[i]);
@@ -451,8 +473,10 @@ public partial class Accessory
         }
     }
 
-    public bool ArrayEqual(byte[] a1, byte[] b1)
+    public static bool ByteArrayCompare(byte[] a1, byte[] b1)
     {
+        if (a1 == null && b1 == null) return true;
+        else if (a1 == null || b1 == null) return false;
         if (a1.Length != b1.Length)
         {
             return false;
@@ -468,4 +492,107 @@ public partial class Accessory
         return true;
     }
 
+    public static byte[] CombineByteArrays(byte[] first, byte[] second)
+    {
+        byte[] ret = new byte[first.Length + second.Length];
+        Buffer.BlockCopy(first, 0, ret, 0, first.Length);
+        Buffer.BlockCopy(second, 0, ret, first.Length, second.Length);
+        return ret;
+    }
+
+    public static byte crcCalc(byte[] instr)
+    {
+        if (instr == null) return 0;
+        byte crc = 0x00;
+        int i = 0;
+        while (i < instr.Length)
+        {
+            for (byte tempI = 8; tempI > 0; tempI--)
+            {
+                byte sum = (byte)((crc & 0xFF) ^ (instr[i] & 0xFF));
+                sum = (byte)((sum & 0xFF) & 0x01);
+
+                crc >>= 1;
+                if (sum != 0)
+                {
+                    crc ^= 0x8C;
+                }
+                instr[i] >>= 1;
+            }
+            i++;
+        }
+        return (crc);
+    }
+
+    public static string CorrectFloatPoint(string s)
+    {
+        if (NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator == ".")
+            s = s.Replace(",", NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator);
+        else
+            s = s.Replace(".", NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator);
+        return s;
+    }
+
+    /* Example: 
+    string[] ports = System.IO.Ports.SerialPort.GetPortNames();
+    Hashtable PortNames = BuildPortNameHash(ports);
+    foreach (String s in PortNames.Keys)
+    {
+        portDesc.Add(PortNames[s].ToString() + ": " + s);
+    } */
+    public static Hashtable BuildPortNameHash(string[] oPortsToMap)
+    {
+        Hashtable oReturnTable = new Hashtable();
+        MineRegistryForPortName("SYSTEM\\CurrentControlSet\\Enum", oReturnTable, oPortsToMap);
+        return oReturnTable;
+    }
+
+    private static void MineRegistryForPortName(string strStartKey, Hashtable oTargetMap, string[] oPortNamesToMatch)
+    {
+        if (oTargetMap.Count >= oPortNamesToMatch.Length)
+            return;
+        RegistryKey oCurrentKey = Registry.LocalMachine;
+
+        try
+        {
+            oCurrentKey = oCurrentKey.OpenSubKey(strStartKey);
+
+            string[] oSubKeyNames = oCurrentKey.GetSubKeyNames();
+            if (((IList<string>)oSubKeyNames).Contains("Device Parameters") && strStartKey != "SYSTEM\\CurrentControlSet\\Enum")
+            {
+                object oPortNameValue = Registry.GetValue("HKEY_LOCAL_MACHINE\\" + strStartKey + "\\Device Parameters", "PortName", null);
+
+                if (oPortNameValue == null || ((IList<string>)oPortNamesToMatch).Contains(oPortNameValue.ToString()) == false)
+                    return;
+                object oFriendlyName = Registry.GetValue("HKEY_LOCAL_MACHINE\\" + strStartKey, "FriendlyName", null);
+
+                string strFriendlyName = "N/A";
+
+                if (oFriendlyName != null)
+                    strFriendlyName = oFriendlyName.ToString();
+                if (strFriendlyName.Contains(oPortNameValue.ToString()) == false)
+                    strFriendlyName = string.Format("{0} ({1})", strFriendlyName, oPortNameValue);
+                oTargetMap[strFriendlyName] = oPortNameValue;
+            }
+            else
+            {
+                foreach (string strSubKey in oSubKeyNames)
+                    MineRegistryForPortName(strStartKey + "\\" + strSubKey, oTargetMap, oPortNamesToMatch);
+            }
+        }
+        catch
+        {
+
+        }
+    }
+
+    public string AssemblyVersion()
+    {
+        return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+    }
+
+    public string ProductVersion()
+    {
+        return Application.ProductVersion.ToString();
+    }
 }
