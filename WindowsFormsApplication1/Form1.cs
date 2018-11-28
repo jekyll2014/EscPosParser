@@ -32,7 +32,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             textBox_code.Select(0, 0);
-            defaultCSVToolStripTextBox.Text = EscPosParser.Properties.Settings.Default.database;
+            defaultCSVToolStripTextBox.Text = DbFile;
             ReadCsv(defaultCSVToolStripTextBox.Text);
             dataGridView_result.DataSource = ResultDatabase;
             dataGridView_commands.ReadOnly = true;

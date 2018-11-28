@@ -179,11 +179,12 @@ Nnn 9dot / 24dot density
 ;;;3;;OLIVETTI PR2;
 ;@string;BinaryString;;;OLIVETTI PR2;
 ;;;27;Graphic data till ESC CR, ESC LF, ESC 7, ESC 2;OLIVETTI PR2;
-;n;BitField;;;OLIVETTI PR2;
-;;;13;eof;OLIVETTI PR2;
-;;;10;eof;OLIVETTI PR2;
-;;;7;eof;OLIVETTI PR2;
-;;;2;eof;OLIVETTI PR2;
+;n1;byte;27;ESC;;
+;n2;byte;;;OLIVETTI PR2;
+;;;13;CR;OLIVETTI PR2;
+;;;10;LF;OLIVETTI PR2;
+;;;37;7;OLIVETTI PR2;
+;;;32;2;OLIVETTI PR2;
 1B 32;;;;RESET B.I.M.;OLIVETTI PR2;
 1B 58;;;;SET RELATIVE HORIZONTAL POSITION;OLIVETTI PR2;
 ;@field;DecArray;;nnn" defines a movement equal to "nnn" columns at bim resolution defined by parameter "nnn" of the ESC 1 command.;OLIVETTI PR2;
