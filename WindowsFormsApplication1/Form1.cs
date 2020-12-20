@@ -34,7 +34,7 @@ namespace EscPosParser
         {
             InitializeComponent();
             textBox_code.Select(0, 0);
-            defaultCSVToolStripTextBox.Text = Settings.Default.database;
+            defaultCSVToolStripTextBox.Text = EscPosParser.Properties.Settings.Default.database;
             ReadCsv(defaultCSVToolStripTextBox.Text);
             dataGridView_result.DataSource = ResultDatabase;
             dataGridView_commands.ReadOnly = true;
