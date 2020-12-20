@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace EscPosParser
 {
     partial class Form1
     {
