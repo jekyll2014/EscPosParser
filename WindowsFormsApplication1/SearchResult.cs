@@ -2,6 +2,7 @@
 using System.Data;
 using System.Linq;
 using System.Text;
+
 using EscPosParser.Properties;
 
 namespace EscPosParser
@@ -238,7 +239,14 @@ namespace EscPosParser
                                     var equation2 = str.Substring(str.IndexOf(':') + 1).Trim();
                                     for (var i3 = 0; i3 < paramName.Count - 1; i3++)
                                         equation2 = equation2.Replace(paramName[i3], paramValue[i3]);
-                                    val = (int) Accessory.Evaluate(equation2);
+                                    try
+                                    {
+                                        val = (int)Accessory.Evaluate(equation2);
+                                    }
+                                    catch
+                                    {
+
+                                    }
                                 }
                             }
                     }
@@ -248,7 +256,7 @@ namespace EscPosParser
                         //insert all parameters before current into equation
                         for (var i2 = 0; i2 < paramName.Count - 1; i2++)
                             equation = equation.Replace(paramName[i2], paramValue[i2]);
-                        val = (int) Accessory.Evaluate(equation); // = str.Substring(str.IndexOf(':') + 1);
+                        val = (int)Accessory.Evaluate(equation); // = str.Substring(str.IndexOf(':') + 1);
                     }
                     else
                     {
@@ -417,7 +425,7 @@ namespace EscPosParser
                         if (paramPosition[parameter] + predefinedParamsVal[0] <= sourceData.Count)
                         {
                             paramRAWValue.Add(sourceData.GetRange(paramPosition[parameter],
-                                (byte) predefinedParamsVal[0]));
+                                (byte)predefinedParamsVal[0]));
                         }
                         else
                         {
